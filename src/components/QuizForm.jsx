@@ -44,14 +44,20 @@ const QuizForm = ({ initialData, onSubmit, onCancel }) => {
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <form onSubmit={handleSubmit}>
           <label className="block mb-2">Title</label>
-          <input type="text" name="title" value={form.title} onChange={handleChange}
-            className="w-full border p-2 rounded mb-4" required />
+          <input
+            type="text" name="title" value={form.title} onChange={handleChange}
+            className="w-full border p-2 rounded mb-4" required
+          />
           <label className="block mb-2">Description</label>
-          <textarea name="description" value={form.description} onChange={handleChange}
-            className="w-full border p-2 rounded mb-4" rows="3" />
+          <textarea
+            name="description" value={form.description} onChange={handleChange}
+            className="w-full border p-2 rounded mb-4" rows="3"
+          />
           <label className="block mb-2">Duration (minutes)</label>
-          <input type="number" name="duration" value={form.duration} onChange={handleChange}
-            className="w-full border p-2 rounded mb-4" min="1" required />
+          <input
+            type="number" name="duration" value={form.duration} onChange={handleChange}
+            className="w-full border p-2 rounded mb-4" min="1" required
+          />
           <div className="flex justify-end gap-2">
             <button type="button" onClick={onCancel}
               className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">Cancel</button>

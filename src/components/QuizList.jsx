@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getQuizzes } from '../services/quizService';
 
-const QuizList = ({ onEdit, onDelete }) => {
+const QuizList = ({ onEdit, onDelete, refreshKey }) => {
   const [quizzes, setQuizzes] = useState([]);
   const [pagination, setPagination] = useState({ page: 1, limit: 10, total: 0, totalPages: 1 });
   const [loading, setLoading] = useState(true);
@@ -23,7 +23,7 @@ const QuizList = ({ onEdit, onDelete }) => {
 
   useEffect(() => {
     fetchQuizzes();
-  }, []);
+  }, [refreshKey]); // refresh when parent triggers
 
   const handlePageChange = (newPage) => {
     fetchQuizzes(newPage);
@@ -64,7 +64,6 @@ const QuizList = ({ onEdit, onDelete }) => {
         </tbody>
       </table>
 
-      {/* Pagination controls */}
       <div className="flex justify-center mt-4 gap-2">
         <button
           disabled={pagination.page <= 1}

@@ -6,7 +6,7 @@ const AdminRoute = ({ children }) => {
 
   if (loading) return <div className="text-center mt-10">Loading...</div>;
   if (!user) return <Navigate to="/login" />;
-  if (user.role !== 'ADMIN') return <Navigate to="/dashboard" />; // or show an unauthorized page
+  if (user.role !== 'ADMIN') return <Navigate to="/dashboard" />;
 
   return children;
 };

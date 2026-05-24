@@ -6,7 +6,7 @@ import { createQuiz, updateQuiz, deleteQuiz } from '../services/quizService';
 const AdminDashboard = () => {
   const [showForm, setShowForm] = useState(false);
   const [editingQuiz, setEditingQuiz] = useState(null);
-  const [refreshKey, setRefreshKey] = useState(0); // to re-fetch list
+  const [refreshKey, setRefreshKey] = useState(0); // increment to force QuizList refresh
 
   const handleCreate = () => {
     setEditingQuiz(null);
@@ -22,7 +22,7 @@ const AdminDashboard = () => {
     if (window.confirm('Are you sure you want to delete this quiz?')) {
       try {
         await deleteQuiz(id);
-        setRefreshKey(prev => prev + 1); // trigger refresh
+        setRefreshKey(prev => prev + 1); // trigger list refresh
       } catch (err) {
         alert(err.response?.data?.message || 'Failed to delete quiz');
       }
@@ -50,7 +50,7 @@ const AdminDashboard = () => {
         </button>
       </div>
 
-      <QuizList key={refreshKey} onEdit={handleEdit} onDelete={handleDelete} />
+      <QuizList key={refreshKey} onEdit={handleEdit} onDelete={handleDelete} refreshKey={refreshKey} />
 
       {showForm && (
         <QuizForm

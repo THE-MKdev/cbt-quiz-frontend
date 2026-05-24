@@ -17,6 +17,10 @@ const Layout = () => {
         <div className="flex items-center gap-4">
           {user ? (
             <>
+              {/* Admin link – only shown if user exists AND is admin */}
+              {user.role === 'ADMIN' && (
+                <Link to="/admin" className="text-blue-600 hover:underline">Admin Panel</Link>
+              )}
               <span className="text-sm text-gray-600">
                 {user.email} ({user.role})
               </span>
