@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getQuizzes } from '../services/quizService';
+import Spinner from './Spinner';
+import ErrorBanner from './ErrorBanner';
 
 const QuizList = ({ onEdit, onDelete, refreshKey }) => {
   const [quizzes, setQuizzes] = useState([]);
@@ -29,8 +31,8 @@ const QuizList = ({ onEdit, onDelete, refreshKey }) => {
     fetchQuizzes(newPage);
   };
 
-  if (loading) return <div className="text-center py-4">Loading quizzes...</div>;
-  if (error) return <div className="text-red-500 py-4">{error}</div>;
+  if (loading) return <Spinner />;
+  if (error) return <ErrorBanner message={error} />;
 
   return (
     <div>

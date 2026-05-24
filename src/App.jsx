@@ -8,6 +8,7 @@ import ResultPage from './pages/ResultPage';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
           <Route path="/admin" element={
             <AdminRoute><AdminDashboard /></AdminRoute>
           } />
-          <Route path="*" element={<Navigate to="/login" />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

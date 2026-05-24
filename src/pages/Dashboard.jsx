@@ -40,7 +40,10 @@ const Dashboard = () => {
     <div>
       <h2 className="text-2xl font-bold mb-6">Available Quizzes</h2>
       {quizzes.length === 0 ? (
-        <p className="text-gray-500">No quizzes available at the moment.</p>
+        <div className="text-center py-10 text-gray-500">
+          <p className="text-lg">No quizzes available.</p>
+          <p className="text-sm">Please check back later or contact an admin.</p>
+        </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {quizzes.map((quiz) => (

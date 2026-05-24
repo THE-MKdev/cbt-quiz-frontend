@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import QuizList from '../components/QuizList';
 import QuizForm from '../components/QuizForm';
-import { createQuiz, updateQuiz, deleteQuiz } from '../services/quizService';
+import { createQuiz, updateQuiz, deleteQuiz } from '../services/quizServic
 
 const AdminDashboard = () => {
   const [showForm, setShowForm] = useState(false);

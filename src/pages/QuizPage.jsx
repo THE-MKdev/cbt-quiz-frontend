@@ -2,6 +2,9 @@ import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getResult, submitAttempt } from '../services/attemptService';
 import api from '../services/api'; // we'll use api directly for fetching attempt details
+import Spinner from '../components/Spinner';
+import ErrorBanner from '../components/ErrorBanner';
+
 
 const QuizPage = () => {
   const { attemptId } = useParams();
@@ -92,8 +95,8 @@ const QuizPage = () => {
     }
   };
 
-  if (loading) return <div className="text-center mt-10">Loading quiz...</div>;
-  if (error) return <div className="text-red-500 text-center mt-10">{error}</div>;
+  if (loading) return <Spinner />;
+  if (error) return <ErrorBanner message={error} />;
 
   const minutes = Math.floor(timeLeft / 60000);
   const seconds = Math.floor((timeLeft % 60000) / 1000);
