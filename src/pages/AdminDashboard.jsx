@@ -1,28 +1,33 @@
 import { useState } from 'react';
 import QuizList from '../components/QuizList';
 import QuizForm from '../components/QuizForm';
-import { createQuiz, updateQuiz, deleteQuiz } from '../services/quizServic
+import { createQuiz, updateQuiz, deleteQuiz, getQuizById } from '../services/quizService';
 
 const AdminDashboard = () => {
   const [showForm, setShowForm] = useState(false);
   const [editingQuiz, setEditingQuiz] = useState(null);
-  const [refreshKey, setRefreshKey] = useState(0); // increment to force QuizList refresh
+  const [refreshKey, setRefreshKey] = useState(0);
 
   const handleCreate = () => {
     setEditingQuiz(null);
     setShowForm(true);
   };
 
-  const handleEdit = (quiz) => {
-    setEditingQuiz(quiz);
-    setShowForm(true);
+  const handleEdit = async (quiz) => {
+    try {
+      const res = await getQuizById(quiz.id);
+      setEditingQuiz(res.data.data);   // full quiz with questions
+      setShowForm(true);
+    } catch (err) {
+      alert('Failed to load quiz details');
+    }
   };
 
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this quiz?')) {
       try {
         await deleteQuiz(id);
-        setRefreshKey(prev => prev + 1); // trigger list refresh
+        setRefreshKey(prev => prev + 1);
       } catch (err) {
         alert(err.response?.data?.message || 'Failed to delete quiz');
       }
